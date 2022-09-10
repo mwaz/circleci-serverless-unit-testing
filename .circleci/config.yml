@@ -24,6 +24,8 @@ commands:
 jobs:
   build:
     executor: serverless-framework/default
+    environment:
+      AWS_DEFAULT_REGION: "eu-central-1"
     steps:
       - checkout
       - aws-cli/install
@@ -44,7 +46,7 @@ jobs:
 
       - run:
           name: Deploy application
-          command: sls deploy
+          command: sls deploy --region ${AWS_DEFAULT_REGION}
 
 
 

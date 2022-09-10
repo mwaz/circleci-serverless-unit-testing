@@ -32,7 +32,7 @@ provider:
         - Effect: "Allow"
           Action:
             - "s3:PutObject"
-          Resource: { "Fn::Join": ["", ["arn:aws:s3:::circle-ci-unit-testing-bucket", "/*" ] ] }
+          Resource: { "Fn::Join": ["", ["arn:aws:s3:::circle-ci-unit-testing-bucket-staging", "/*" ] ] }
         - Effect: "Allow"
           Action:
           - dynamodb:Query
@@ -61,7 +61,7 @@ functions:
     handler: handler.uploadCsvToS3Handler
     environment:
       TABLE_NAME: circle-ci-unit-testing-table
-      BUCKET_NAME: circle-ci-unit-testing-bucket
+      BUCKET_NAME: circle-ci-unit-testing-bucket-staging
 
 # you can add CloudFormation resource templates here
 resources:
@@ -69,7 +69,7 @@ resources:
     S3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: circle-ci-unit-testing-bucket
+        BucketName: circle-ci-unit-testing-bucket-staging
     DynamoDB:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -83,11 +83,11 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-   
+
  Outputs:
     S3Bucket:
       Description: "S3 Bucket Name"
-      Value: "circle-ci-unit-testing-bucket"
+      Value: "circle-ci-unit-testing-bucket-staging"
     DynamoDB:
       Description: "DynamoDB Table Name"
       Value: "circle-ci-unit-testing-table"
