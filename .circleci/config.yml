@@ -26,25 +26,28 @@ jobs:
     executor: serverless-framework/default
     steps:
       - checkout
-      - aws-cli/install
-      - aws-oidc-setup:
-          aws-role-arn: "${CIRCLE_CI_WEB_IDENTITY_ROLE}"
-      - run:
-          name: Test AWS connection
-          command: aws s3 ls
-      - run:
-          name: Install Serverless CLI and dependencies
-          command: |
-            sudo npm i -g serverless
-            npm install
+      # - aws-cli/install
+      # - aws-oidc-setup:
+      #     aws-role-arn: "${CIRCLE_CI_WEB_IDENTITY_ROLE}"
+      # - run:
+      #     name: Test AWS connection
+      #     command: aws s3 ls
+      # - run:
+      #     name: Install Serverless CLI and dependencies
+      #     command: |
+      #       sudo npm i -g serverless
+      #       npm install
 
-      - run:
-          name: Run tests with code coverage
-          command: npm run coverage
+      # - run:
+      #     name: Run tests with code coverage
+      #     command: npm run coverage
 
+      # - run:
+      #     name: Deploy application
+      #     command: sls deploy
       - run:
-          name: Deploy application
-          command: sls deploy
+          name: Show contents of OIDC TOKEN
+          command: echo ${CIRCLE_OIDC_TOKEN}
 
 
 
