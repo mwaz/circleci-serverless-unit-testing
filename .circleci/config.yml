@@ -32,9 +32,6 @@ jobs:
       - aws-oidc-setup:
           aws-role-arn: "${CIRCLE_CI_WEB_IDENTITY_ROLE}"
       - run:
-          name: Test AWS connection
-          command: aws s3 ls
-      - run:
           name: Install Serverless CLI and dependencies
           command: |
             sudo npm i -g serverless
