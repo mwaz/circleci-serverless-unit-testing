@@ -13,7 +13,7 @@ commands:
       - run:
           name: Get short-term credentials
           command: |
-            STS=($(aws sts assume-role-with-web-identity --role-arn << parameters.aws-role-arn >> --role-session-name "circleciunittesting" --web-identity-token "${CIRCLE_OIDC_TOKEN}" --duration-seconds 900 --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text))
+            STS=($(aws sts assume-role-with-web-identity --role-arn ${CIRCLE_CI_WEB_IDENTITY_ROLE} --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" --web-identity-token ${CIRCLE_OIDC_TOKEN} --duration-seconds 900 --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text))
             echo "export AWS_ACCESS_KEY_ID=${STS[0]}" >> $BASH_ENV
             echo "export AWS_SECRET_ACCESS_KEY=${STS[1]}" >> $BASH_ENV
             echo "export AWS_SESSION_TOKEN=${STS[2]}" >> $BASH_ENV
@@ -37,15 +37,15 @@ jobs:
           command: |
             sudo npm i -g serverless
             npm install
- 
+
       - run:
           name: Run tests with code coverage
           command: npm run coverage
- 
+
       - run:
           name: Deploy application
           command: sls deploy
-  
+
 
 
 workflows:
