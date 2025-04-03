@@ -25,7 +25,7 @@ jobs:
   build:
     executor: serverless-framework/default
     environment:
-      AWS_DEFAULT_REGION: "eu-central-1"
+      AWS_DEFAULT_REGION: "us-east-1"
     steps:
       - checkout
       - aws-cli/install
