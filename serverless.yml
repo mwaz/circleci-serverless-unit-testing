@@ -1,5 +1,5 @@
 service: circleci-serverless-unit-testing
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
