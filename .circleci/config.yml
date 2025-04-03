@@ -26,6 +26,7 @@ jobs:
     executor: serverless-framework/default
     environment:
       AWS_DEFAULT_REGION: "us-east-1"
+      SERVERLESS_ACCESS_KEY: ${SERVERLESS_ACCESS_KEY} 
     steps:
       - checkout
       - aws-cli/install
