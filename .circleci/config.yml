@@ -44,7 +44,7 @@ jobs:
 
       - run:
           name: Deploy application
-          command: sls deploy --region ${AWS_DEFAULT_REGION} --no-auth
+          command: sls deploy --region ${AWS_DEFAULT_REGION} --no-auth --disable-telemetry
 
 
 
